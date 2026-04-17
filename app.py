@@ -275,6 +275,6 @@ with tab2:
 
 st.markdown("""
 <div style='text-align: center; color: #111111; font-size: 0.9rem; margin-top: 1rem;'>
-    ✨ Made with ❤️ by Risha Gupta | Ultra Secure Login System
+    ✨Ultra Secure Login System
 </div>
 """, unsafe_allow_html=True)
