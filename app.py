@@ -25,7 +25,8 @@ header, footer, .stDeployButton, #MainMenu {
 .block-container {
     padding-top: 1rem !important;
     padding-bottom: 2rem !important;
-    max-width: 1100px !important;
+    max-width: 1000px !important;
+    width: 100% !important;
     background: transparent !important;
 }
 
@@ -37,11 +38,17 @@ h1 {
     text-align: center;
     font-weight: 700 !important;
     margin-bottom: 0.3rem !important;
+    font-size: clamp(1.6rem, 4vw, 2.6rem) !important;
+}
+
+p {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem) !important;
 }
 
 .stTabs [data-baseweb="tab-list"] {
-    gap: 1rem !important;
+    gap: 0.5rem !important;
     border-bottom: none !important;
+    flex-wrap: wrap !important;
 }
 
 .stTabs [data-baseweb="tab"] {
@@ -50,6 +57,7 @@ h1 {
     background: transparent !important;
     border-radius: 12px !important;
     padding: 10px 14px !important;
+    min-width: fit-content !important;
 }
 
 .stTabs [aria-selected="true"] {
@@ -61,13 +69,13 @@ h1 {
     background: rgba(255,255,255,0.35) !important;
     border: 1px solid rgba(255,255,255,0.25) !important;
     border-radius: 22px !important;
-    padding: 25px !important;
+    padding: 18px !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
     backdrop-filter: blur(10px) !important;
 }
 
 [data-testid="stTextInput"] input {
-    background: rgba(255,255,255,0.85) !important;
+    background: rgba(255,255,255,0.9) !important;
     border-radius: 14px !important;
     border: 1px solid #f0b6cc !important;
     color: #111111 !important;
@@ -80,6 +88,7 @@ h1 {
     border-radius: 14px !important;
     font-weight: 700 !important;
     padding: 0.6rem 1.2rem !important;
+    width: 100% !important;
 }
 
 [data-testid="stButton"] button:hover {
@@ -104,6 +113,18 @@ h1 {
     border: 1px solid #f0a5bc !important;
     margin-top: 12px !important;
 }
+
+@media (max-width: 768px) {
+    .block-container {
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
+    }
+
+    [data-testid="stForm"] {
+        padding: 14px !important;
+        border-radius: 18px !important;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -127,7 +148,7 @@ if "login_msg_type" not in st.session_state:
 st.markdown("""
 <div style='text-align: center; margin-bottom: 2rem;'>
     <h1>🔐 Strong Login System Pro</h1>
-    <p style='color: #111111; font-size: 1.1rem; font-weight: 500;'>Secure • Fast</p>
+    <p style='color: #111111; font-size: 1.05rem; font-weight: 500;'>Secure • Fast</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -148,19 +169,16 @@ tab1, tab2 = st.tabs(["📝 Create Account", "🚪 Login"])
 with tab1:
     st.subheader("✨ Create New Account")
     with st.form("signup_form", clear_on_submit=True):
-        col_a, col_b = st.columns([2, 1])
-        with col_a:
-            username = st.text_input(
-                "👤 Username",
-                placeholder="Min 5 chars + Upper/Lower/Number",
-                help="Example: RishaGupta123"
-            )
-        with col_b:
-            password = st.text_input(
-                "🔑 Password",
-                type="password",
-                placeholder="Min 8 chars + Special char"
-            )
+        username = st.text_input(
+            "👤 Username",
+            placeholder="Min 5 chars + Upper/Lower/Number",
+            help="Example: RishaGupta123"
+        )
+        password = st.text_input(
+            "🔑 Password",
+            type="password",
+            placeholder="Min 8 chars + Special char"
+        )
 
         submit = st.form_submit_button("🚀 Create Account")
 
@@ -200,11 +218,8 @@ with tab2:
 
     if st.session_state.users:
         with st.form("login_form", clear_on_submit=True):
-            col_c, col_d = st.columns(2)
-            with col_c:
-                login_username = st.text_input("👤 Username", key="login_username")
-            with col_d:
-                login_password = st.text_input("🔑 Password", type="password", key="login_password")
+            login_username = st.text_input("👤 Username", key="login_username")
+            login_password = st.text_input("🔑 Password", type="password", key="login_password")
 
             login_submit = st.form_submit_button("🎯 Login")
 
@@ -254,13 +269,12 @@ with tab2:
                 st.markdown(f'<div class="success-box">{st.session_state.login_msg}</div>', unsafe_allow_html=True)
             else:
                 st.markdown(f'<div class="error-box">{st.session_state.login_msg}</div>', unsafe_allow_html=True)
-
     else:
         st.info("👆 Please create an account from the Sign Up section to continue.")
 
 
 st.markdown("""
 <div style='text-align: center; color: #111111; font-size: 0.9rem; margin-top: 1rem;'>
-    ✨Ultra Secure Login System
+    ✨ Made with ❤️ by Risha Gupta | Ultra Secure Login System
 </div>
 """, unsafe_allow_html=True)
